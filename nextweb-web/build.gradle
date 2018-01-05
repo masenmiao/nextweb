@@ -1,0 +1,23 @@
+
+
+def profiles = 'dev'
+
+
+
+
+
+jar {
+    baseName = 'nextweb-web'
+}
+
+dependencies {
+
+		compile(project(':nextweb-common'))
+		compile("org.springframework.boot:spring-boot-starter-webflux:${springBootVersion}")
+
+			
+	  //testCompile("io.projectreactor:reactor-test:${springBootVersion}")
+		
+		
+}
+

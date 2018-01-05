@@ -1,0 +1,36 @@
+
+
+def profiles = 'dev'
+
+
+
+
+
+jar {
+    baseName = 'nextweb-common'
+}
+
+		dependencies {
+			compile("commons-dbcp:commons-dbcp:1.4")
+			compile("mysql:mysql-connector-java:5.1.34")
+	    compile("org.mybatis:mybatis:3.3.0")
+	    compile("org.mybatis:mybatis-spring:1.2.4")
+	    
+			compile("org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}")
+			//compile("org.springframework.boot:spring-boot-starter-jdbc:${springBootVersion}")
+			//compile("org.springframework.boot:spring-boot-starter-aop:${springBootVersion}")
+
+	    
+	    testCompile("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
+	    
+	    compile 'com.github.pagehelper:pagehelper:4.1.1'
+			compile 'tk.mybatis:mapper:3.3.9'
+			
+		compile("commons-beanutils:commons-beanutils:1.9.1")
+		compile("commons-chain:commons-chain:1.2")
+		compile("commons-collections:commons-collections:3.2")
+		compile("commons-io:commons-io:2.2")
+		compile("commons-codec:commons-codec:1.9")
+		compile("commons-lang:commons-lang:2.2")
+		compile("org.apache.commons:commons-lang3:3.3.1")
+	}
