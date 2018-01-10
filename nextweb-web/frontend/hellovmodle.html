@@ -1,0 +1,49 @@
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<h1>绑定表单</h1>
+<div id="s7">
+	<p>文本框：{{text}}</p>
+	<p>多行文本：{{textArea}}</p>
+	<p>单选按钮：{{radio}}</p>
+	<p>复选框：{{checkbox}}</p>
+	<p>多选框：{{select}}</p>
+	<hr>
+	<p>
+		文本框：<input type="text" v-model="text">
+	</p>
+	<p>
+		多行文本：
+		<textarea v-model="textArea"></textarea>
+	</p>
+	<p>
+		单选按钮：<input type="radio" v-model="radio" value="1" id="one">
+		<label for="one">1</label> 
+		<input type="radio" value="2" v-model="radio" id="two">
+		<label for="two">2</label>
+	</p>
+	<p>
+		复选框：<input type="checkbox" v-model="checkbox" id="checkbox"><label
+			for="checkbox">复选框</label>
+	</p>
+	<p>
+		多选框：<select id="select" v-model="select">
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+			<option value="4">4</option>
+		</select>
+	</p>
+	<!-- 在处理表单输入的时候，还有.lazy、.number、.trim几个修饰符，它们的作用分别是在change事件中更新、将表单输入转换为数值以及去掉表单中的前后空格。 -->
+</div>
+<script>
+	let
+	vm7 = new Vue({
+		el : '#s7',
+		data : {
+			text : 'text',
+			textArea : 'textArea',
+			radio : '',
+			checkbox : '',
+			select : '',
+		}
+	})
+</script>

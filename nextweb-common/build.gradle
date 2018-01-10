@@ -17,8 +17,8 @@ jar {
 	    compile("org.mybatis:mybatis-spring:1.2.4")
 	    
 			compile("org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}")
-			//compile("org.springframework.boot:spring-boot-starter-jdbc:${springBootVersion}")
-			//compile("org.springframework.boot:spring-boot-starter-aop:${springBootVersion}")
+			compile("org.springframework.boot:spring-boot-starter-jdbc:${springBootVersion}")
+			compile("org.springframework.boot:spring-boot-starter-aop:${springBootVersion}")
 
 	    
 	    testCompile("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
@@ -33,4 +33,6 @@ jar {
 		compile("commons-codec:commons-codec:1.9")
 		compile("commons-lang:commons-lang:2.2")
 		compile("org.apache.commons:commons-lang3:3.3.1")
+		
+		compile("org.apache.tomcat:tomcat-jdbc:8.5.23")   
 	}

@@ -1,0 +1,8 @@
+mysqldb:
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/summerdb?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&zeroDateTimeBehavior=convertToNull
+    username: summer
+    password: 123456
+    
+server:
+  port: 8081

@@ -1,0 +1,33 @@
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<h1>组件</h1>
+<div id="s8">
+	<h3>hello world组件</h3>
+	<hello-world></hello-world>
+	<h3>从父组件传递数据</h3>
+	<hello-world name="zhang3"></hello-world>
+	<h3>动态传递数据</h3>
+	<hello-world :name="name"></hello-world>
+</div>
+<script>
+  let component1 = {
+    template: '<p>{{hello}} {{name}}</p>',
+    data() {
+      return {
+        hello: 'hello world'
+      }
+    },
+    props: [
+      'name'
+    ]
+  }
+  let vm8 = new Vue({
+    el: '#s8',
+    data: {
+      name: 'yi tian'
+    },
+    components: {
+      'hello-world': component1,
+    }
+  })
+</script>

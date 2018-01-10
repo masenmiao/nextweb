@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Hello Vue!</title>
+<!-- 这里引用了Vue框架的CDN，所以不需要任何配置即可使用Vue -->
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+
+	<div id="helloworld">
+		{{message}}
+		</p>
+		<button v-on:click='changeText'>修改文本</button>
+		<p>文本：{{text}}</p>
+		<p>组合表达式：</p>
+		<p v-once>只渲染一次的文本:{{text}}</p>
+		<p>
+			HTML代码：<span v-html="html"></span>
+		</p>
+		<p>
+			属性:
+			<button v-bind:disabled="disabled">禁用按钮</button>
+		</p>
+		<p>单词：{{words}}</p>
+		<p>单词大写：{{toUpper}}</p>
+
+		<h3>v-if渲染会实际创建和销毁对象</h3>
+		<p>
+			分数是:<input type="text" v-model="mark" />
+		</p>
+		<p v-if="mark < 60">不及格</p>
+		<p v-else-if="mark <80">及格</p>
+		<p v-else="">优秀</p>
+		<h3>v-show仅仅调用CSS display属性</h3>
+		<button @click="toggleShow">改变show状态</button>
+		<p v-show="show">可以看到我</p>
+	</div>
+
+	<script>
+		var app = new Vue({
+			el : '#helloworld',
+			data : {
+				message : 'Hello Vue World',
+				text : 1,
+				html : '<del>666</del>',
+				disabled : true,
+				words : 'love ',
+				mark : 80,
+				show : true
+			},
+			methods : {
+				changeText : function(event) {
+					this.text += 1
+				},
+				toggleShow : function() {
+					this.show = !this.show
+				}
+			},
+			//计算属性有个优点就是惰性求值，下面的例子中，toUpper计算属性依赖于words属性，只要words不发生改变，那么多次访问toUpper不会重新出发计算，而是会使用已有的结果。
+			computed : {
+				toUpper : function() {
+					return this.words.toUpperCase()
+				}
+			}
+		})
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,25 @@
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<h1>事件处理</h1>
+<div id="s6">
+	<h3>计数器</h3>
+	<p>
+		<button @click="addCount">增加计数</button>
+		<em>{{count}}</em>
+	</p>
+	<h3>获取按键(单击、回车和空格)</h3>
+	<input type="text" @keyup.enter="alert('按下了回车')"
+		@keyup.space="alert('按下了空格')" @click="alert('单击')" />
+</div>
+<script>
+	let vm6 = new Vue({
+		el : '#s6',
+		data : {
+			count : 0
+		},
+		methods : {
+			addCount : function() {
+				this.count++
+			}
+		}
+	})
+</script>

@@ -1,0 +1,46 @@
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<h1>列表渲染</h1>
+<div id="s5">
+  <h3>名字列表</h3>
+  <ul>
+    <li v-for="name in names">{{name}}</li>
+  </ul>
+
+  <h3>人物表格</h3>
+  <table>
+    <thead>
+    <tr>
+      <td>编号</td>
+      <td>姓名</td>
+      <td>年龄</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr v-for="(person, index) of people" :key="index">
+      <td>{{index}}</td>
+      <td>{{person.name}}</td>
+      <td>{{person.age}}</td>
+    </tr>
+    </tbody>
+  </table>
+
+</div>
+<script>
+  let vm5 = new Vue({
+    el: '#s5',
+    data: {
+      names: [
+        'zhang3',
+        'li4',
+        'yitian',
+        'jojo'
+      ],
+      people: [
+        {name: 'zhang3', age: 24},
+        {name: 'li4', age: 25},
+        {name: 'yitian', age: 24},
+        {name: 'jojo', age: 30}
+      ]
+    }
+  })
+</script>

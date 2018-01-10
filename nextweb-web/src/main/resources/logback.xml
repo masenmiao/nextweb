@@ -25,6 +25,8 @@
   
     <logger name="cn.corp" level="DEBUG">
   </logger>
+      <logger name="sample" level="DEBUG">
+  </logger>
   <logger name="org.summer" level="INFO">
   </logger>
   <logger name="org.springframework" level="INFO">
