@@ -46,7 +46,6 @@
                 total: 0,
                 pageSize: 10,
                 currentPage: 1,
-                userid: '',
                 dialogFormVisible: false,
                 form: '',
             }
@@ -54,7 +53,7 @@
         components: {
             DbModal
         },
-        mounted () {
+        mounted () {//生命周期的一个阶段,el 被新创建的 vm.$el 替换，并挂载到实例上去之后调用该钩子
             this.getCustomers();
             Bus.$on('filterResultData', (data) => {
             	console.log('bbb'+data);
@@ -62,7 +61,6 @@
                 //this.tableData = data.results;
                 //this.total = data.total_pages;
                 //this.pageSize = data.count;
-                //this.userid = data.userid;
 
             });
         },
@@ -77,10 +75,9 @@
                 this.$axios.get(this.apiUrl, {
                     params: {
                         page: this.currentPage,
-                        userid: this.userid
                     }
                 }).then((response) => {
-                    this.tableData = response.data.data;
+                    this.tableData = response.data;
                     //this.total = response.data.data.total;
                     //this.pageSize = response.data.data.count;
                     console.log(response.data.data);
@@ -93,12 +90,14 @@
                 this.getCustomers()
             },
             editItem: function (index, rows) {
+
                 this.dialogFormVisible = true;
                 const itemId = rows[index].id;
                 //const idurl = 'http://127.0.0.1:8000/api/persons/detail/' + itemId;
-                const idurl = 'http://127.0.0.1:8081/api/persons/' + itemId;
+                const idurl = 'http://127.0.0.1:8081/api/users/detail/' + itemId;
                 this.$axios.get(idurl).then((response) => {
                     this.form = response.data;
+                    console.log(this.form.name);
                 }).catch(function (response) {
                     console.log(response)
                 });

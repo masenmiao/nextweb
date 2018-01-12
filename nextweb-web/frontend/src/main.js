@@ -15,7 +15,8 @@ import {
     Option
 } from 'element-ui'
 
-import 'element-ui/lib/theme-chalk/index.css'
+//element-ui 2.0 theme-chalk dialog无法显示，所以更改版本到1.x
+import 'element-ui/lib/theme-default/index.css'
 import lang from 'element-ui/lib/locale/lang/en'
 import locale from 'element-ui/lib/locale'
 
