@@ -12,11 +12,11 @@ import sample.dany.dao.UserAutoDAO;
 import sample.dao.UserDAO;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl2 implements UserService {
 
-	//这个Dao需要配置xml sqlmap
+	//这个sql 不需要配置xml sqlmap,自动生成
 	@Resource
-	private UserDAO userDao;
+	private UserAutoDAO userDao;
 
 	/**
 	 *  默认的key生成策略是通过KeyGenerator生成的(如果不指定key=的话)
@@ -25,13 +25,13 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public List<User> getUserAll() {
-		return userDao.findAll();
+		return userDao.selectAll();
 	}
 
 	@Override
 	public User getUserById(String id) {
 		// TODO Auto-generated method stub
-		return userDao.findById(id);
+		return userDao.selectByPrimaryKey(Long.parseLong(id));
 	}
 
 }

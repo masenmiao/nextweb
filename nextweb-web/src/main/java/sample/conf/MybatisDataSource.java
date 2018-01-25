@@ -1,5 +1,7 @@
 package sample.conf;
 
+import java.util.Properties;
+
 import javax.annotation.PreDestroy;
 import javax.sql.DataSource;
 
@@ -14,22 +16,21 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 
+
 @Configuration
 @EnableConfigurationProperties(DataSourceProperties.class)
-//mybaits dao 搜索路径
-@MapperScan("sample.dao")//扫描dao生成bean
+// mybaits dao 搜索路径，需要配置sqlmap
+@MapperScan("sample.dao")
 public class MybatisDataSource {
 	@Autowired
 	private DataSourceProperties dataSourceProperties;
-	//mybaits mapper xml搜索路径
-	private final static String mapperLocations="classpath:sample/dao/*.xml"; 
-
+	// mybaits mapper xml搜索路径
+	private final static String mapperLocations = "classpath:sample/dao/*.xml";
 	private org.apache.tomcat.jdbc.pool.DataSource pool;
-	
-	@Bean(destroyMethod = "close")
-	public DataSource dataSource() {		
-		DataSourceProperties config = dataSourceProperties;		
-		this.pool = new org.apache.tomcat.jdbc.pool.DataSource();		
+	@Bean(name="dataSource",destroyMethod = "close")
+	public DataSource dataSource() {
+		DataSourceProperties config = dataSourceProperties;
+		this.pool = new org.apache.tomcat.jdbc.pool.DataSource();
 		this.pool.setDriverClassName(config.getDriverClassName());
 		this.pool.setUrl(config.getUrl());
 		if (config.getUsername() != null) {
@@ -38,7 +39,7 @@ public class MybatisDataSource {
 		if (config.getPassword() != null) {
 			this.pool.setPassword(config.getPassword());
 		}
-		System.out.println("db config : " + config.getUrl() +":"+config.getUsername()+":"+config.getPassword());
+		System.out.println("db config : " + config.getUrl() + ":" + config.getUsername() + ":" + config.getPassword());
 		this.pool.setInitialSize(config.getInitialSize());
 		this.pool.setMaxActive(config.getMaxActive());
 		this.pool.setMaxIdle(config.getMaxIdle());
@@ -47,7 +48,7 @@ public class MybatisDataSource {
 		this.pool.setTestOnBorrow(config.isTestOnBorrow());
 		this.pool.setTestOnReturn(config.isTestOnReturn());
 		this.pool.setValidationQuery(config.getValidationQuery());
-		
+
 		this.pool.setTestWhileIdle(config.isTestWhileIdle());
 		this.pool.setTimeBetweenEvictionRunsMillis(config.getTimeBetweenEvictionRunsMillis());
 		return this.pool;
@@ -59,18 +60,20 @@ public class MybatisDataSource {
 			this.pool.close();
 		}
 	}
-	
-	@Bean
-	public SqlSessionFactory sqlSessionFactoryBean() throws Exception {		
+
+	@Bean(name="sqlSessionFactory")
+	public SqlSessionFactory sqlSessionFactoryBean() throws Exception {
 		SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
-		sqlSessionFactoryBean.setDataSource(dataSource());		
+		sqlSessionFactoryBean.setDataSource(dataSource());
 		PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
 		sqlSessionFactoryBean.setMapperLocations(resolver.getResources(mapperLocations));
-		 return sqlSessionFactoryBean.getObject();
+		return sqlSessionFactoryBean.getObject();
 	}
-	
+
 	@Bean
 	public PlatformTransactionManager transactionManager() {
 		return new DataSourceTransactionManager(dataSource());
 	}
+
+
 }

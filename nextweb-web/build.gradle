@@ -15,7 +15,7 @@ dependencies {
 		compile(project(':nextweb-common')) 
 		compile("org.springframework.boot:spring-boot-starter-webflux:${springBootVersion}")
 		compile("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
-			
+		
 	  //testCompile("io.projectreactor:reactor-test:${springBootVersion}")
 		
 		

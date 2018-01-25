@@ -2,6 +2,8 @@ package sample.webflux;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executor;
 
 import javax.annotation.Resource;
 
@@ -21,8 +23,12 @@ import reactor.core.publisher.Mono;
 @RestController
 public class UserController {
 
-	@Resource
+	//使用自动生成sql map 的dao 实现
+	@Resource(name="userServiceImpl2")
 	UserService userService;
+	
+	@Resource(name = "asynFutureExecutor")
+	private Executor asynFutureExecutor;
 
 	// 调用一个restTemplate.getForObject eureka 服务
 	@RequestMapping(value = "/api/users")  //api/users/ 也路由到这(id为空时)
@@ -67,9 +73,13 @@ public class UserController {
 	@RequestMapping(value = "/api/users/detail/{id}")
 	public Mono<User> queryUserDetail(@PathVariable String id) {
 		// 理论上web 服务需要访问一个后台服务，这里简化为直接访问数据库
+//		User user = userService.getUserById(id);
 		System.out.println("queryUserDetail");
-		User user = userService.getUserById(id);
-		return Mono.just(user);
+		// 修改为非阻塞方式异步调用, 20180125
+		CompletableFuture<User> future = CompletableFuture.supplyAsync(() -> {
+		    return userService.getUserById(id);
+		}, asynFutureExecutor);
+		return Mono.fromFuture(future);
 	}
 
 }
