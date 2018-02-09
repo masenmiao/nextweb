@@ -35,7 +35,7 @@
 </template>
 
 <script>
-    import Bus from '../eventBus'
+    import Bus from '../../eventBus'
     import DbModal from './DbModal.vue'
 
     export default {

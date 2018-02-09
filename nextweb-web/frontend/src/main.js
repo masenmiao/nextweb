@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
+import VueRouter from 'vue-router'
 import {
     Button,
     Select,
@@ -25,10 +26,13 @@ import moment from 'moment'//日期
 import axios from 'axios'//网络
 import curvejs from 'curvejs'//动画
 
+import routes from './routes'//菜单路由
+
 Object.defineProperty(Vue.prototype, '$moment', { value: moment });
 Object.defineProperty(Vue.prototype, '$axios', { value: axios });
 Object.defineProperty(Vue.prototype, '$curvejs', { value: curvejs });
 
+Vue.use(VueRouter);  
 Vue.use(Button);
 Vue.use(Select);
 Vue.use(Row);
@@ -44,7 +48,15 @@ Vue.use(Option);
 
 locale.use(lang);
 
+//创建router实例
+const router = new VueRouter({
+  //mode指定路由模式，默认'hash'，另一种可选的模式是'history'
+  //mode: 'hash',
+  routes
+});
+
 new Vue({
   el: '#app',
+  router,
   render: h => h(App)
 })

@@ -8,7 +8,7 @@
 
 <script>
     import lodash from 'lodash'
-    import Bus from '../eventBus'
+    import Bus from '../../eventBus'
 
     export default {
         name: 'db-filterinput',
