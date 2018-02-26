@@ -42,7 +42,7 @@ public class SampleWebFluxApplication {
 	@Bean
 	public RouterFunction<ServerResponse> monoRouterFunction(EchoHandler echoHandler) {
 		return route(POST("/echo"), echoHandler::echo)
-		.andRoute(GET("/queryPerson/{id}"), echoHandler::queryPerson);
+				.andRoute(GET("/queryPerson/{id}"), echoHandler::queryPerson);
 	}
 
 }
